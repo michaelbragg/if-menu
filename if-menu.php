@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: If Menu
-Plugin URI: http://morewp.net/plugin/if-menu
+Plugin URI: http://wordpress.org/plugins/if-menu/
 Description: Show/hide menu items with conditional statements
-Version: 0.1
-Author: More WordPress
-Author URI: http://morewp.net
+Version: 0.2
+Author: Andrei Igna
+Author URI: http://rokm.ro
 License: GPL2
 */
 
-/*  Copyright 2012 More WordPress (email: hello@morewp.net)
+/*  Copyright 2012 More WordPress (email: andrei@rokm.ro)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 

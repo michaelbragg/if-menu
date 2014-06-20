@@ -1,8 +1,8 @@
-=== Plugin Name ===
+=== If Menu ===
 Contributors: andrei.igna
 Tags: menu, if, conditional, statements, hide, show, dispaly
-Requires at least: 3.0.0
-Tested up to: 3.4
+Requires at least: 3.7
+Tested up to: 3.9.1
 Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,18 +33,22 @@ To install the plugin, follow the steps below
 
 New conditional statements can be added by any other plugin or theme.
 
-Example of adding a new conditional statement
+Example of adding a new conditional statement (add the code in your theme's `functions.php` or plugin file)
+
+`
+add_filter( 'if_menu_conditions', 'my_new_menu_conditions' );
+`
 
 ``
-add_filter( 'if_menu_conditions', 'my_new_menu_conditions' );
+function my_new_menu_conditions( $conditions ) {
+  $conditions[] = array(
+    'name'    =>  'If single custom-post-type', // name of the condition
+    'condition' =>  function($item) {          // callback - must return TRUE or FALSE
+      return is_singular( 'my-custom-post-type' );
+    }
+  );
 
-function my_new_menu_conditions( $conditions ) {	
-	$conditions[] = array(
-		'name'		=>	'If single custom-post-type',	// name of the condition
-		'condition'	=>	function() {					// callback - must return TRUE or FALSE
-			return is_singular( 'my-custom-post-type' );
-		}
-	);
+  return $conditions;
 }
 ``
 
@@ -54,5 +58,12 @@ function my_new_menu_conditions( $conditions ) {
 
 == Changelog ==
 
+= 0.2 =
+
+* [Fix](http://wordpress.org/support/topic/save-is-requested-before-leaving-menu-page) - alert for leaving page even if no changes were made for menus (thanks [Denny](http://wordpress.org/support/profile/ddahly))
+* Fix - update method in `Walker_Nav_Menu_Edit` to be compatible with newer version of WP
+* [Fix](http://wordpress.org/support/topic/bugfix-for-readmetxt) - example in Readme (thanks [BramNL](http://wordpress.org/support/profile/bramnl))
+* [Feature](http://wordpress.org/support/topic/new-feature-power-to-the-conditions) - access to menu item object in condition callback (thanks [BramNL](http://wordpress.org/support/profile/bramnl))
+
 = 0.1 =
-Plugin release. Included basic menu conditional statements
+* Plugin release. Included basic menu conditional statements
