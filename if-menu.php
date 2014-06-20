@@ -110,7 +110,7 @@ class If_Menu {
 			</label>
 		</p>
 
-		<p class="if-menu-condition description description-wide">
+		<p class="if-menu-condition description description-wide" style="display: <?php echo $if_menu_enable ? 'block' : 'none' ?>">
 			<select id="edit-menu-item-if-menu-condition-type-<?php echo $item->ID; ?>" name="menu-item-if-menu-condition-type[<?php echo $item->ID; ?>]">
 				<option <?php selected( 'show', $if_menu_condition_type ) ?> value="show"><?php _e( 'Show', 'if-menu' ) ?></option>
 				<option <?php selected( 'hide', $if_menu_condition_type ) ?> value="hide"><?php _e( 'Hide', 'if-menu' ) ?></option>
