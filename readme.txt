@@ -13,9 +13,9 @@ Show/hide menu items with conditional statements
 
 Simple plugin that adds extra functionality to Menu Items. The plugin will allow to show or hide menu items based on condition statements (Is single page, User is Logged In, etc).
 
-The management is very easy, each menu item will have a "Enable Conditional Logic" check, that will allow to select a conditional statement (Example in Screenshots)
+The management is very easy, each menu item will have a "Enable Conditional Logic" check that will allow to select a conditional statement (Example in Screenshots)
 
-Basic conditional statements are included in the plugin, other will be included in future releases or can be added nu another plugin or theme.
+Basic conditional statements are included in the plugin, other will be included in future releases or can be added by another plugins or themes.
 
 Example of adding a new conditional statement is described in the FAQ section
 
@@ -29,17 +29,16 @@ To install the plugin, follow the steps below
 
 == Frequently Asked Questions ==
 
-= How can I add a conditinal statement =
+= How can I add a conditinal statement for menu items? =
 
-New conditional statements can be added by any other plugin or theme.
+New conditional statements can be added by any other plugins or themes.
 
-Example of adding a new conditional statement (add the code in your theme's `functions.php` or plugin file)
+Example of adding a new conditional statement for disaplying/hiding a menu item when current page is a custom-post-type.
 
 `
+// theme's functions.php or plugin file
 add_filter( 'if_menu_conditions', 'my_new_menu_conditions' );
-`
 
-``
 function my_new_menu_conditions( $conditions ) {
   $conditions[] = array(
     'name'    =>  'If single custom-post-type', // name of the condition
@@ -50,7 +49,11 @@ function my_new_menu_conditions( $conditions ) {
 
   return $conditions;
 }
-``
+`
+
+= Where do I find conditional functions? =
+
+WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_Tags) which can be used to create conditional statements for almost any combination that a theme/plugin developer can think of.
 
 == Screenshots ==
 
@@ -60,10 +63,12 @@ function my_new_menu_conditions( $conditions ) {
 
 = 0.2 =
 
+Update for compatibility with newer versions of WordPress
+
+* [Feature](http://wordpress.org/support/topic/new-feature-power-to-the-conditions) - access to menu item object in condition callback (thanks [BramNL](http://wordpress.org/support/profile/bramnl))
 * [Fix](http://wordpress.org/support/topic/save-is-requested-before-leaving-menu-page) - alert for leaving page even if no changes were made for menus (thanks [Denny](http://wordpress.org/support/profile/ddahly))
 * Fix - update method in `Walker_Nav_Menu_Edit` to be compatible with newer version of WP
 * [Fix](http://wordpress.org/support/topic/bugfix-for-readmetxt) - example in Readme (thanks [BramNL](http://wordpress.org/support/profile/bramnl))
-* [Feature](http://wordpress.org/support/topic/new-feature-power-to-the-conditions) - access to menu item object in condition callback (thanks [BramNL](http://wordpress.org/support/profile/bramnl))
 
 = 0.1 =
 * Plugin release. Included basic menu conditional statements
