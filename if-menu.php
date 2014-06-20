@@ -150,9 +150,9 @@ require_once( ABSPATH . 'wp-admin/includes/nav-menu.php' );
 
 class If_Menu_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
 
-	function start_el(&$output, $item, $depth, $args) {
+	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$desc_snipp = '<div class="menu-item-actions description-wide submitbox">';
-		parent::start_el($output, $item, $depth, $args);
+		parent::start_el( $output, $item, $depth, $args, $id );
 
 		$pos = strrpos( $output, $desc_snipp );
 		if( $pos !== false ) {
