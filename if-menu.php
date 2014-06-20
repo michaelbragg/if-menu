@@ -75,7 +75,7 @@ class If_Menu {
 				$condition_type = get_post_meta( $item->ID, 'if_menu_condition_type', true );
 				$condition = get_post_meta( $item->ID, 'if_menu_condition', true );
 
-				$condition_result = call_user_func( $conditions[$condition]['condition'] );
+				$condition_result = call_user_func( $conditions[$condition]['condition'], $item );
 				if( $condition_type == 'show' ) $condition_result = ! $condition_result;
 
 				if( $condition_result ) {
