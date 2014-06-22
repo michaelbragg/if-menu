@@ -1,7 +1,7 @@
 jQuery( function( $ ) {
 
-	$( '.menu-item-if-menu-enable' ).change( function() {
-		$( this ).closest( '.if-menu-enable' ).next().toggle( $( this ).prop( 'checked' ) );
-	} );
+  $( 'body' ).on( 'change', '.menu-item-if-menu-enable', function() {
+    $( this ).closest( '.if-menu-enable' ).next().toggle( $( this ).prop( 'checked' ) );
+  } );
 
 } );

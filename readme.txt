@@ -61,6 +61,12 @@ WordPress provides [a lot of functions](http://codex.wordpress.org/Conditional_T
 
 == Changelog ==
 
+= 0.2.1 =
+
+Minor fixes
+
+* [Fix](https://twitter.com/joesegal/status/480386235249082368) - Editing menus - show/hide conditions when adding new item (thanks [Joseph Segal](https://twitter.com/joesegal))
+
 = 0.2 =
 
 Update for compatibility with newer versions of WordPress
