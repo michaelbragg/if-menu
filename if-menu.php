@@ -38,22 +38,39 @@ class If_Menu {
 			add_action( 'wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2 );
 			add_filter( 'wp_edit_nav_menu_walker', create_function( '', 'return "If_Menu_Walker_Nav_Menu_Edit";' ) );
       add_action( 'wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields', 10, 4 );
+
+      if ( self::$has_custom_walker && 1 != get_option( 'if-menu-hide-notice', 0 ) ) {
+        add_action( 'admin_notices', 'If_Menu::admin_notice' );
+        add_action( 'wp_ajax_if_menu_hide_notice', 'If_Menu::hide_admin_notice' );
+      }
+
 		} else {
 			add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
 		}
 
-    if ( self::$has_custom_walker ) {
-      add_action( 'admin_notices', 'If_Menu::admin_notices' );
-    }
-
 	}
 
-	public static function admin_notices() {
+	public static function admin_notice() {
 		global $pagenow;
-		if( current_user_can( 'edit_theme_options' ) && ( $pagenow == 'plugins.php' || $pagenow == 'nav-menus.php' ) ) {
-			echo '<div class="updated"><p>' . __( '<b>If Menu</b> plugin detected another plugin(s) that modify the menus, and to don\'t break them <b>If Menu</b> plugin is disabled.', 'if-menu' ) . '</p></div>';
+
+		if( current_user_can( 'edit_theme_options' ) ) {
+      ?>
+      <div class="notice error is-dismissible if-menu-notice">
+        <p><b>If Menu</b> plugin detected a conflict with another plugin or theme and may not work as expected. <a href="https://wordpress.org/plugins/if-menu/faq/" target="_blank">Read more about the issue here</a></p>
+      </div>
+      <?php
 		}
+
 	}
+
+  public static function hide_admin_notice() {
+
+    $re = update_option('if-menu-hide-notice', 1);
+
+    echo $re ? 1 : 0;
+
+    wp_die();
+  }
 
 	public static function get_conditions( $for_testing = false ) {
 		$conditions = apply_filters( 'if_menu_conditions', array() );
@@ -95,8 +112,11 @@ class If_Menu {
 	public static function admin_init() {
 		global $pagenow;
 
+    if( $pagenow == 'nav-menus.php' || self::$has_custom_walker ) {
+      wp_enqueue_script( 'if-menu-js', plugins_url( 'if-menu.js' , __FILE__ ), array( 'jquery' ) );
+    }
+
 		if( $pagenow == 'nav-menus.php' ) {
-			wp_enqueue_script( 'if-menu-js', plugins_url( 'if-menu.js' , __FILE__ ), array( 'jquery' ) );
       require_once( ABSPATH . 'wp-admin/includes/nav-menu.php' );
       require_once( plugin_dir_path( __FILE__ ) . 'if-menu-nav-menu.php' );
 		}
