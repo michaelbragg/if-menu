@@ -3,7 +3,7 @@
 Plugin Name: If Menu
 Plugin URI: http://wordpress.org/plugins/if-menu/
 Description: Show/hide menu items with conditional statements
-Version: 0.3
+Version: 0.4
 Author: Andrei Igna
 Author URI: http://rokm.ro
 License: GPL2
