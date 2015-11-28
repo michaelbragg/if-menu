@@ -5,9 +5,11 @@ jQuery( function( $ ) {
   } );
 
   $( '.wrap' ).on( 'click', '.if-menu-notice button', function() {
-    $.post(ajaxurl, { action: 'if_menu_hide_notice' }, function(response) {
-      alert('Got this from the server: ' + response);
-    });
+    $.post( ajaxurl, { action: 'if_menu_hide_notice' }, function( response ) {
+      if ( response != 1 ) {
+        alert( 'If Menu: Error trying to hide the notice - ' + response );
+      }
+    } );
   } );
 
 } );
