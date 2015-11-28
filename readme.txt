@@ -1,8 +1,8 @@
 === If Menu ===
 Contributors: andrei.igna
-Tags: menu, if, conditional, statements, hide, show, dispaly
+Tags: menu, if, conditional, statements, hide, show, dispaly, roles, nav menu
 Requires at least: 3.7
-Tested up to: 4.0
+Tested up to: 4.3.1
 Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -28,6 +28,15 @@ To install the plugin, follow the steps below
 3. Enable conditional statements for your Menu Items in Appearance -> Menus page
 
 == Frequently Asked Questions ==
+
+= If Menu is broken =
+
+The code for modifying the menu items is limited and if other plugins/themes try to alter the menu items, this plugin will break.
+
+This is an ongoing [issue with WordPress](http://core.trac.wordpress.org/ticket/18584) which hopefully will be fixed in a future release.
+
+Try to use just one plugin that changes the functionality for menu items.
+
 
 = How can I add a conditinal statement for menu items? =
 
@@ -64,6 +73,12 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 1. Enable conditional statements for Menu Items
 
 == Changelog ==
+
+= 0.4 =
+*Release Date - 29 November 2015*
+
+* Improved compatibility with other plugins/themes using a [shared action hook for menu item fields](https://core.trac.wordpress.org/ticket/18584#comment:37)
+* Enhancement - show visibility status in menu item titles
 
 = 0.3 =
 
