@@ -3,7 +3,7 @@
 add_filter( 'if_menu_conditions', 'if_menu_basic_conditions' );
 
 function if_menu_basic_conditions( $conditions ) {
-	
+
 	$conditions[] = array(
 		'name'		=>	__( 'User is logged in', 'if-menu' ),
 		'condition'	=>	'is_user_logged_in'
@@ -44,9 +44,14 @@ function if_menu_basic_conditions( $conditions ) {
 		'condition'	=>	'is_single'
 	);
 
+  $conditions[] = array(
+    'name'    =>  __( 'Page', 'if-menu' ),
+    'condition' =>  'is_page'
+  );
+
 	$conditions[] = array(
-		'name'		=>	__( 'Page', 'if-menu' ),
-		'condition'	=>	'is_page'
+		'name'		=>	__( 'Mobile', 'if-menu' ),
+		'condition'	=>	'wp_is_mobile'
 	);
 
 	return $conditions;
