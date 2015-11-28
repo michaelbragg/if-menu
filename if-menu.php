@@ -38,6 +38,7 @@ class If_Menu {
 			add_action( 'wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2 );
 			add_filter( 'wp_edit_nav_menu_walker', create_function( '', 'return "If_Menu_Walker_Nav_Menu_Edit";' ) );
       add_action( 'wp_nav_menu_item_custom_fields', 'If_Menu::menu_item_fields', 10, 4 );
+      add_action( 'wp_nav_menu_item_custom_title', 'If_Menu::menu_item_title' );
 
       if ( self::$has_custom_walker && 1 != get_option( 'if-menu-hide-notice', 0 ) ) {
         add_action( 'admin_notices', 'If_Menu::admin_notice' );
@@ -150,6 +151,22 @@ class If_Menu {
     </p>
 
     <?php
+  }
+
+  public static function menu_item_title( $item_id ) {
+    $if_menu_enabled = get_post_meta( $item_id, 'if_menu_enable', true );
+    $conditionType = get_post_meta( $item_id, 'if_menu_condition_type', true );
+    $condition = get_post_meta( $item_id, 'if_menu_condition', true );
+    if ( $conditionType === 'show' ) {
+      $conditionType = '';
+    }
+
+    if ( $if_menu_enabled ) {
+      ?>
+      <span class="is-submenu"><?php _e( sprintf('%s if %s', $conditionType, $condition), 'if-menu' ) ?></span>
+      <?php
+    }
+
   }
 
 	public static function wp_update_nav_menu_item( $menu_id, $menu_item_db_id ) {

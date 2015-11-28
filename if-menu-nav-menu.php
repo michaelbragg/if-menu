@@ -76,7 +76,16 @@ class If_Menu_Walker_Nav_Menu_Edit extends Walker_Nav_Menu_Edit {
         <li id="menu-item-<?php echo $item_id; ?>" class="<?php echo implode(' ', $classes ); ?>">
             <div class="menu-item-bar">
                 <div class="menu-item-handle">
-                    <span class="item-title"><span class="menu-item-title"><?php echo esc_html( $title ); ?></span> <span class="is-submenu" <?php echo $submenu_text; ?>><?php _e( 'sub item' ); ?></span></span>
+                    <span class="item-title">
+                        <span class="menu-item-title"><?php echo esc_html( $title ); ?></span>
+                        <span class="is-submenu" <?php echo $submenu_text; ?>><?php _e( 'sub item' ); ?></span>
+
+                        <?php
+                        // This is the added section
+                        do_action( 'wp_nav_menu_item_custom_title', $item_id, $item, $depth, $args );
+                        // end added section
+                        ?>
+                    </span>
                     <span class="item-controls">
                         <span class="item-type"><?php echo esc_html( $item->type_label ); ?></span>
                         <span class="item-order hide-if-js">
