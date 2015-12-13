@@ -74,6 +74,11 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 == Changelog ==
 
+= 0.4.1 =
+*Release Date - 13 December 2015*
+
+* Fix - Fixes [issue](https://wordpress.org/support/topic/cant-add-items-to-menu-with-plugin-enabled) with adding new menu items
+
 = 0.4 =
 *Release Date - 29 November 2015*
 

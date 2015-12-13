@@ -3,7 +3,7 @@
 Plugin Name: If Menu
 Plugin URI: http://wordpress.org/plugins/if-menu/
 Description: Show/hide menu items with conditional statements
-Version: 0.4
+Version: 0.4.1
 Author: Andrei Igna
 Author URI: http://rokm.ro
 License: GPL2
@@ -119,7 +119,7 @@ class If_Menu {
       wp_enqueue_script( 'if-menu-js', plugins_url( 'if-menu.js', __FILE__ ), array( 'jquery' ) );
     }
 
-		if ( $pagenow == 'nav-menus.php' ) {
+		if ( $pagenow == 'nav-menus.php' || defined( 'DOING_AJAX' ) ) {
       require_once( ABSPATH . 'wp-admin/includes/nav-menu.php' );
       require_once( plugin_dir_path( __FILE__ ) . 'if-menu-nav-menu.php' );
 		}
