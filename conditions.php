@@ -57,7 +57,7 @@ function if_menu_basic_conditions( $conditions ) {
 	if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
 		$conditions[] = array(
 			'name'			=>	__( 'User is logged in for current site', 'if-menu' ),
-			'condition'	=>	'if_user_has_read_cap'
+			'condition'	=>	'if_menu_basic_condition_read_cap'
 		);
 	}
 
