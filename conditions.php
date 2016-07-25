@@ -54,6 +54,13 @@ function if_menu_basic_conditions( $conditions ) {
 		'condition'	=>	'wp_is_mobile'
 	);
 
+	if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
+		$conditions[] = array(
+			'name'			=>	__( 'User is logged in for current site', 'if-menu' ),
+			'condition'	=>	'if_user_has_read_cap'
+		);
+	}
+
 	return $conditions;
 }
 
@@ -85,4 +92,8 @@ function if_menu_basic_condition_subscriber() {
 	global $current_user;
 	if( is_user_logged_in() ) foreach( array( 'administrator', 'editor', 'author', 'contributor', 'subscriber' ) as $role ) if( in_array( $role, $current_user->roles ) ) return true;
 	return false;
+}
+
+function if_menu_basic_condition_read_cap() {
+	return current_user_can('read');
 }
