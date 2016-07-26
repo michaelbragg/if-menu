@@ -113,15 +113,22 @@ class If_Menu {
 	}
 
 	public static function admin_init() {
-		global $pagenow;
+		global $pagenow, $wp_version;
 
     if ( $pagenow == 'nav-menus.php' || self::$has_custom_walker ) {
       wp_enqueue_script( 'if-menu-js', plugins_url( 'if-menu.js', __FILE__ ), array( 'jquery' ) );
     }
 
 		if ( $pagenow == 'nav-menus.php' || defined( 'DOING_AJAX' ) ) {
+
       require_once( ABSPATH . 'wp-admin/includes/nav-menu.php' );
-      require_once( plugin_dir_path( __FILE__ ) . 'if-menu-nav-menu.php' );
+
+      if ( version_compare( $wp_version, '4.5.0', '>=' ) ){
+        require_once( plugin_dir_path( __FILE__ ) . 'if-menu-nav-menu-4.5.php' );
+      } else {
+        require_once( plugin_dir_path( __FILE__ ) . 'if-menu-nav-menu.php' );
+      }
+
 		}
 	}
 

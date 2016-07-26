@@ -2,7 +2,7 @@
 Contributors: andrei.igna
 Tags: menu, if, conditional, statements, hide, show, dispaly, roles, nav menu
 Requires at least: 3.7
-Tested up to: 4.3.1
+Tested up to: 4.5.3
 Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
