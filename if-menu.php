@@ -4,6 +4,7 @@ Plugin Name: If Menu
 Plugin URI: http://wordpress.org/plugins/if-menu/
 Description: Show/hide menu items with conditional statements
 Version: 0.4.1
+Text Domain: if-menu
 Author: Andrei Igna
 Author URI: http://rokm.ro
 License: GPL2
@@ -33,6 +34,8 @@ class If_Menu {
 	public static function init() {
 		self::$has_custom_walker = 'Walker_Nav_Menu_Edit' !== apply_filters( 'wp_edit_nav_menu_walker', 'Walker_Nav_Menu_Edit' );
 
+    load_plugin_textdomain( 'if-menu', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
 		if( is_admin() ) {
 			add_action( 'admin_init', 'If_Menu::admin_init' );
 			add_action( 'wp_update_nav_menu_item', 'If_Menu::wp_update_nav_menu_item', 10, 2 );
@@ -56,7 +59,7 @@ class If_Menu {
 		if( current_user_can( 'edit_theme_options' ) ) {
       ?>
       <div class="notice error is-dismissible if-menu-notice">
-        <p><b>If Menu</b> plugin detected a conflict with another plugin or theme and may not work as expected. <a href="https://wordpress.org/plugins/if-menu/faq/" target="_blank">Read more about the issue here</a></p>
+        <p><?php printf( __( '<b>If Menu</b> plugin detected a conflict with another plugin or theme and may not work as expected. <a href="%s" target="_blank">Read more about the issue here</a>', 'if-menu' ), 'https://wordpress.org/plugins/if-menu/faq/' ) ?></p>
       </div>
       <?php
 		}
@@ -178,8 +181,8 @@ class If_Menu {
           </select>
           <select class="menu-item-if-menu-enable-next" name="menu-item-if-menu-enable[<?php echo $item_id; ?>][]">
             <option value="false">..</option>
-            <option value="and" <?php if (isset($if_menu_enable[$index + 1])) selected( 'and', $if_menu_enable[$index + 1] ) ?>>AND</option>
-            <option value="or" <?php if (isset($if_menu_enable[$index + 1])) selected( 'or', $if_menu_enable[$index + 1] ) ?>>OR</option>
+            <option value="and" <?php if (isset($if_menu_enable[$index + 1])) selected( 'and', $if_menu_enable[$index + 1] ) ?>><?php _e('AND', 'if-menu') ?></option>
+            <option value="or" <?php if (isset($if_menu_enable[$index + 1])) selected( 'or', $if_menu_enable[$index + 1] ) ?>><?php _e('OR', 'if-menu') ?></option>
           </select>
         </p>
       <?php endfor ?>
@@ -202,7 +205,7 @@ class If_Menu {
       echo '<span class="is-submenu">';
       printf( __( '%s if %s', 'if-menu' ), $conditionTypes[0], $conditions[0] );
       if ( count( $if_menu_enabled ) > 1 ) {
-        printf( _n( ' and %d more condition', ' and %d more conditions', count( $if_menu_enabled ) - 1, 'if-menu' ), count( $if_menu_enabled ) - 1 );
+        printf( ' ' . _n( 'and 1 more condition', 'and %d more conditions', count( $if_menu_enabled ) - 1, 'if-menu' ), count( $if_menu_enabled ) - 1 );
       }
       echo '</span>';
     }
@@ -240,4 +243,4 @@ include 'conditions.php';
 	Run the plugin
 ------------------------------------------------ */
 
-add_action( 'init', 'If_Menu::init' );
+add_action( 'plugins_loaded', 'If_Menu::init' );
