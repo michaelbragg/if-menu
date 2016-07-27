@@ -96,29 +96,33 @@ class If_Menu {
 			if ( in_array( $item->menu_item_parent, $hidden_items ) ) {
 				unset( $items[$key] );
 				$hidden_items[] = $item->ID;
-			} elseif ( $enabled = get_post_meta( $item->ID, 'if_menu_enable' ) ) {
-				$if_condition_types = get_post_meta( $item->ID, 'if_menu_condition_type' );
-				$if_conditions = get_post_meta( $item->ID, 'if_menu_condition' );
+			} else {
+        $enabled = get_post_meta( $item->ID, 'if_menu_enable' );
 
-        $eval = array();
+        if ($enabled && $enabled[0] !== '0') {
+          $if_condition_types = get_post_meta( $item->ID, 'if_menu_condition_type' );
+          $if_conditions = get_post_meta( $item->ID, 'if_menu_condition' );
 
-        foreach ($enabled as $index => $operator) {
-          $singleCondition = '';
+          $eval = array();
 
-          if ($index) {
-            $singleCondition .= $operator . ' ';
+          foreach ($enabled as $index => $operator) {
+            $singleCondition = '';
+
+            if ($index) {
+              $singleCondition .= $operator . ' ';
+            }
+
+            $singleCondition .= $if_condition_types[$index] === 'show' ? '' : '!';
+            $singleCondition .= call_user_func( $conditions[$if_conditions[$index]]['condition'], $item ) ? 1 : 0;
+
+            $eval[] = $singleCondition;
           }
 
-          $singleCondition .= $if_condition_types[$index] === 'show' ? '' : '!';
-          $singleCondition .= call_user_func( $conditions[$if_conditions[$index]]['condition'], $item ) ? 1 : 0;
-
-          $eval[] = $singleCondition;
+          if ( $eval && ! eval( 'return ' . implode( ' ', $eval ) . ';' ) ) {
+            unset( $items[$key] );
+            $hidden_items[] = $item->ID;
+          }
         }
-
-				if ( ! eval( 'return ' . implode( ' ', $eval ) . ';' ) ) {
-					unset( $items[$key] );
-					$hidden_items[] = $item->ID;
-				}
 			}
 		}
 
@@ -194,7 +198,7 @@ class If_Menu {
   public static function menu_item_title( $item_id ) {
     $if_menu_enabled = get_post_meta( $item_id, 'if_menu_enable' );
 
-    if ( count( $if_menu_enabled ) ) {
+    if ( count( $if_menu_enabled ) && $if_menu_enabled[0] !== '0' ) {
       $conditionTypes = get_post_meta( $item_id, 'if_menu_condition_type' );
       $conditions = get_post_meta( $item_id, 'if_menu_condition' );
 

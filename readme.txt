@@ -74,6 +74,15 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 == Changelog ==
 
+= 0.5 =
+*Release Date - 27 July 2016*
+
+* Improvement - Support for WordPress 4.5
+* Feature - New condition checking logged in user for current site in Multi Site (https://wordpress.org/support/topic/multi-site-user-is-logged-in-conditi
+on)
+* Feature - Added support for multi conditions (https://wordpress.org/support/topic/more-than-one-condition-operators-1)
+* Improvement - RO & DE translations
+
 = 0.4.1 =
 *Release Date - 13 December 2015*
 
