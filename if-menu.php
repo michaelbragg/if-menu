@@ -93,16 +93,26 @@ class If_Menu {
 			if ( in_array( $item->menu_item_parent, $hidden_items ) ) {
 				unset( $items[$key] );
 				$hidden_items[] = $item->ID;
-			} elseif ( get_post_meta( $item->ID, 'if_menu_enable', true ) ) {
-				$condition_type = get_post_meta( $item->ID, 'if_menu_condition_type', true );
-				$condition = get_post_meta( $item->ID, 'if_menu_condition', true );
+			} elseif ( $enabled = get_post_meta( $item->ID, 'if_menu_enable' ) ) {
+				$if_condition_types = get_post_meta( $item->ID, 'if_menu_condition_type' );
+				$if_conditions = get_post_meta( $item->ID, 'if_menu_condition' );
 
-				$should_hide_item = call_user_func( $conditions[$condition]['condition'], $item );
-				if ( $condition_type == 'show' ) {
-          $should_hide_item = ! $should_hide_item;
+        $eval = array();
+
+        foreach ($enabled as $index => $operator) {
+          $singleCondition = '';
+
+          if ($index) {
+            $singleCondition .= $operator . ' ';
+          }
+
+          $singleCondition .= $if_condition_types[$index] === 'show' ? '' : '!';
+          $singleCondition .= call_user_func( $conditions[$if_conditions[$index]]['condition'], $item ) ? 1 : 0;
+
+          $eval[] = $singleCondition;
         }
 
-				if ( $should_hide_item ) {
+				if ( ! eval( 'return ' . implode( ' ', $eval ) . ';' ) ) {
 					unset( $items[$key] );
 					$hidden_items[] = $item->ID;
 				}
@@ -195,7 +205,6 @@ class If_Menu {
         printf( _n( ' and %d more condition', ' and %d more conditions', count( $if_menu_enabled ) - 1, 'if-menu' ), count( $if_menu_enabled ) - 1 );
       }
       echo '</span>';
-
     }
   }
 
