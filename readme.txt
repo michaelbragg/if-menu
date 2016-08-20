@@ -1,8 +1,8 @@
 === If Menu ===
 Contributors: andrei.igna
 Tags: menu, if, conditional, statements, hide, show, dispaly, roles, nav menu
-Requires at least: 3.7
-Tested up to: 4.5.3
+Requires at least: 4
+Tested up to: 4.6
 Stable tag: trunk
 License: GPL2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -75,9 +75,9 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 == Changelog ==
 
 = 0.5 =
-*Release Date - 27 July 2016*
+*Release Date - 20 August 2016*
 
-* Improvement - Support for WordPress 4.5
+* Improvement - Support for WordPress 4.6
 * Feature - New condition checking logged in user for current site in Multi Site (https://wordpress.org/support/topic/multi-site-user-is-logged-in-conditi
 on)
 * Feature - Added support for multi conditions (https://wordpress.org/support/topic/more-than-one-condition-operators-1)
