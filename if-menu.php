@@ -32,6 +32,7 @@ class If_Menu {
 	protected static $has_custom_walker = null;
 
 	public static function init() {
+    global $pagenow;
 		self::$has_custom_walker = 'Walker_Nav_Menu_Edit' !== apply_filters( 'wp_edit_nav_menu_walker', 'Walker_Nav_Menu_Edit' );
 
     load_plugin_textdomain( 'if-menu', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
@@ -47,13 +48,16 @@ class If_Menu {
         add_action( 'admin_notices', 'If_Menu::admin_notice' );
         add_action( 'wp_ajax_if_menu_hide_notice', 'If_Menu::hide_admin_notice' );
       }
-		}
 
-    add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
+      if ($pagenow !== 'nav-menus.php') {
+        add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
+      }
+		} else {
+      add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
+    }
 	}
 
 	public static function admin_notice() {
-		global $pagenow;
 
 		if( current_user_can( 'edit_theme_options' ) ) {
       ?>
