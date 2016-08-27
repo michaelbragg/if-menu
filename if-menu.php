@@ -161,6 +161,11 @@ class If_Menu {
       $if_menu_condition_type[] = '';
       $if_menu_condition[] = '';
     }
+
+    $groupedConditions = array();
+    foreach ($conditions as $condition) {
+      $groupedConditions[isset($condition['group']) ? $condition['group'] : 'Other'][] = $condition;
+    }
     ?>
 
     <p class="if-menu-enable description description-wide">
@@ -179,8 +184,12 @@ class If_Menu {
           </select>
           <?php _e( 'if', 'if-menu' ); ?>
           <select class="menu-item-if-menu-condition" id="edit-menu-item-if-menu-condition-<?php echo $item_id; ?>" name="menu-item-if-menu-condition[<?php echo $item_id; ?>][]">
-            <?php foreach( $conditions as $condition ): ?>
-              <option <?php selected( $condition['name'], $if_menu_condition[$index] ) ?>><?php echo $condition['name']; ?></option>
+            <?php foreach ($groupedConditions as $group => $conditions) : ?>
+              <optgroup label="<?php echo $group ?>">
+                <?php foreach( $conditions as $condition ): ?>
+                  <option <?php selected( $condition['name'], $if_menu_condition[$index] ) ?>><?php echo $condition['name']; ?></option>
+                <?php endforeach ?>
+              </optgroup>
             <?php endforeach ?>
           </select>
           <select class="menu-item-if-menu-enable-next" name="menu-item-if-menu-enable[<?php echo $item_id; ?>][]">
