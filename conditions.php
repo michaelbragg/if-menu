@@ -3,95 +3,60 @@
 add_filter( 'if_menu_conditions', 'if_menu_basic_conditions' );
 
 function if_menu_basic_conditions( $conditions ) {
+  global $wp_roles;
+
+  foreach ($wp_roles->role_names as $roleId => $role) {
+    $conditions[] = array(
+      'name'      =>  sprintf('User is %s', $role),
+      'condition' =>  function() use($roleId) {
+        global $current_user;
+        if( is_user_logged_in() ) return in_array( $roleId, $current_user->roles );
+        return false;
+      },
+      'group'     =>  'User state & roles'
+    );
+  }
+
 
 	$conditions[] = array(
 		'name'		=>	__( 'User is logged in', 'if-menu' ),
-		'condition'	=>	'is_user_logged_in'
-	);
-
-	$conditions[] = array(
-		'name'		=>	__( 'User is Admin', 'if-menu' ),
-		'condition'	=>	'if_menu_basic_condition_admin'
-	);
-
-	$conditions[] = array(
-		'name'		=>	__( 'User is Editor', 'if-menu' ),
-		'condition'	=>	'if_menu_basic_condition_editor'
-	);
-
-	$conditions[] = array(
-		'name'		=>	__( 'User is Subscriber', 'if-menu' ),
-		'condition'	=>	'if_menu_basic_condition_subscriber'
-	);
-
-	$conditions[] = array(
-		'name'		=>	__( 'User is Author', 'if-menu' ),
-		'condition'	=>	'if_menu_basic_condition_author'
-	);
-
-	$conditions[] = array(
-		'name'		=>	__( 'User is Contributor', 'if-menu' ),
-		'condition'	=>	'if_menu_basic_condition_contributor'
+		'condition'	=>	'is_user_logged_in',
+    'group'     =>  'User state & roles'
 	);
 
 	$conditions[] = array(
 		'name'		=>	__( 'Front Page', 'if-menu' ),
-		'condition'	=>	'is_front_page'
+		'condition'	=>	'is_front_page',
+    'group'     =>  'Page type'
 	);
 
 	$conditions[] = array(
 		'name'		=>	__( 'Single Post', 'if-menu' ),
-		'condition'	=>	'is_single'
+		'condition'	=>	'is_single',
+    'group'     =>  'Page type'
 	);
 
   $conditions[] = array(
     'name'    =>  __( 'Page', 'if-menu' ),
-    'condition' =>  'is_page'
+    'condition' =>  'is_page',
+    'group'     =>  'Page type'
   );
 
 	$conditions[] = array(
 		'name'		=>	__( 'Mobile', 'if-menu' ),
-		'condition'	=>	'wp_is_mobile'
+		'condition'	=>	'wp_is_mobile',
+    'group'     =>  'Device'
 	);
 
 	if (defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true) {
 		$conditions[] = array(
 			'name'			=>	__( 'User is logged in for current site', 'if-menu' ),
-			'condition'	=>	'if_menu_basic_condition_read_cap'
+			'condition'	=>	'if_menu_basic_condition_read_cap',
+      'group'     =>  'User state & roles'
 		);
 	}
 
 	return $conditions;
-}
-
-function if_menu_basic_condition_admin() {
-	global $current_user;
-	if( is_user_logged_in() ) return in_array( 'administrator', $current_user->roles );
-	return false;
-}
-
-function if_menu_basic_condition_editor() {
-	global $current_user;
-	if( is_user_logged_in() ) foreach( array( 'administrator', 'editor' ) as $role ) if( in_array( $role, $current_user->roles ) ) return true;
-	return false;
-}
-
-function if_menu_basic_condition_author() {
-	global $current_user;
-	if( is_user_logged_in() ) foreach( array( 'administrator', 'editor', 'author' ) as $role ) if( in_array( $role, $current_user->roles ) ) return true;
-	return false;
-}
-
-function if_menu_basic_condition_contributor() {
-	global $current_user;
-	if( is_user_logged_in() ) foreach( array( 'administrator', 'editor', 'author', 'contributor' ) as $role ) if( in_array( $role, $current_user->roles ) ) return true;
-	return false;
-}
-
-function if_menu_basic_condition_subscriber() {
-	global $current_user;
-	if( is_user_logged_in() ) foreach( array( 'administrator', 'editor', 'author', 'contributor', 'subscriber' ) as $role ) if( in_array( $role, $current_user->roles ) ) return true;
-	return false;
 }
 
 function if_menu_basic_condition_read_cap() {

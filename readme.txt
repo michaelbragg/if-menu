@@ -74,13 +74,18 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 
 == Changelog ==
 
+= 0.6 =
+*Release Date - 27 August 2016*
+
+* Improvement - Dynamic conditions based on default & custom user roles (added by plugins or themes) [thanks Daniele](https://wordpress.org/support/topic/feature-request-custom-roles)
+
 = 0.5 =
 *Release Date - 20 August 2016*
 
 * Improvement - Support for WordPress 4.6
-* Feature - New condition checking logged in user for current site in Multi Site (https://wordpress.org/support/topic/multi-site-user-is-logged-in-conditi
+* Feature - New condition checking logged in user for current site in Multi Site [requested here](https://wordpress.org/support/topic/multi-site-user-is-logged-in-conditi
 on)
-* Feature - Added support for multi conditions (https://wordpress.org/support/topic/more-than-one-condition-operators-1)
+* Feature - Added support for multi conditions [thanks for this ideea](https://wordpress.org/support/topic/more-than-one-condition-operators-1)
 * Improvement - RO & DE translations
 
 = 0.4.1 =
