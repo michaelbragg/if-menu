@@ -47,10 +47,9 @@ class If_Menu {
         add_action( 'admin_notices', 'If_Menu::admin_notice' );
         add_action( 'wp_ajax_if_menu_hide_notice', 'If_Menu::hide_admin_notice' );
       }
-		} else {
-			add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
 		}
 
+    add_filter( 'wp_get_nav_menu_items', 'If_Menu::wp_get_nav_menu_items' );
 	}
 
 	public static function admin_notice() {
