@@ -228,17 +228,19 @@ class If_Menu {
   }
 
 	public static function wp_update_nav_menu_item( $menu_id, $menu_item_db_id ) {
-    delete_post_meta( $menu_item_db_id, 'if_menu_enable' );
-    delete_post_meta( $menu_item_db_id, 'if_menu_condition_type' );
-    delete_post_meta( $menu_item_db_id, 'if_menu_condition' );
+    if (isset($_POST['menu-item-if-menu-enable'])) {
+      delete_post_meta( $menu_item_db_id, 'if_menu_enable' );
+      delete_post_meta( $menu_item_db_id, 'if_menu_condition_type' );
+      delete_post_meta( $menu_item_db_id, 'if_menu_condition' );
 
-    foreach ( $_POST['menu-item-if-menu-enable'][$menu_item_db_id] as $index => $value ) {
-      if ( in_array( $value, array('1', 'and', 'or') ) ) {
-        add_post_meta( $menu_item_db_id, 'if_menu_enable', $value );
-        add_post_meta( $menu_item_db_id, 'if_menu_condition_type', $_POST['menu-item-if-menu-condition-type'][$menu_item_db_id][$index] );
-        add_post_meta( $menu_item_db_id, 'if_menu_condition', $_POST['menu-item-if-menu-condition'][$menu_item_db_id][$index] );
-      } else {
-        break;
+      foreach ( $_POST['menu-item-if-menu-enable'][$menu_item_db_id] as $index => $value ) {
+        if ( in_array( $value, array('1', 'and', 'or') ) ) {
+          add_post_meta( $menu_item_db_id, 'if_menu_enable', $value );
+          add_post_meta( $menu_item_db_id, 'if_menu_condition_type', $_POST['menu-item-if-menu-condition-type'][$menu_item_db_id][$index] );
+          add_post_meta( $menu_item_db_id, 'if_menu_condition', $_POST['menu-item-if-menu-condition'][$menu_item_db_id][$index] );
+        } else {
+          break;
+        }
       }
     }
   }

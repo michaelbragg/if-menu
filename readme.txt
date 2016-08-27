@@ -80,6 +80,7 @@ Got the icons from here https://dribbble.com/shots/1045549-Light-Switches-PSD, s
 * Improvement - Dynamic conditions based on default & custom user roles (added by plugins or themes) [thanks Daniele](https://wordpress.org/support/topic/feature-request-custom-roles)
 * Improvement - Grouped conditions by User, Page or other types
 * Fix - Filter menu items in admin section
+* Fix - Better menu items filter saving code
 
 = 0.5 =
 *Release Date - 20 August 2016*
