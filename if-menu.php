@@ -206,10 +206,10 @@ class If_Menu {
               </optgroup>
             <?php endforeach ?>
           </select>
-          <select class="menu-item-if-menu-enable-next" name="menu-item-if-menu-enable[<?php echo $item_id; ?>][]">
+          <select class="menu-item-if-menu-enable-next" name="menu-item-if-menu-enable[<?php echo esc_attr( $item_id ); ?>][]">
             <option value="false">..</option>
-            <option value="and" <?php if (isset($if_menu_enable[$index + 1])) selected( 'and', $if_menu_enable[$index + 1] ) ?>><?php _e('AND', 'if-menu') ?></option>
-            <option value="or" <?php if (isset($if_menu_enable[$index + 1])) selected( 'or', $if_menu_enable[$index + 1] ) ?>><?php _e('OR', 'if-menu') ?></option>
+            <option value="and" <?php if (isset($if_menu_enable[$index + 1])) selected( 'and', $if_menu_enable[$index + 1] ) ?>><?php esc_html_e( 'AND', 'if-menu' ) ?></option>
+            <option value="or" <?php if (isset($if_menu_enable[$index + 1])) selected( 'or', $if_menu_enable[$index + 1] ) ?>><?php esc_html_e( 'OR', 'if-menu' ) ?></option>
           </select>
         </p>
       <?php endfor ?>
