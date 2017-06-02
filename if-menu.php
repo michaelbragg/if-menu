@@ -62,7 +62,18 @@ class If_Menu {
 		if( current_user_can( 'edit_theme_options' ) ) {
       ?>
       <div class="notice error is-dismissible if-menu-notice">
-        <p><?php printf( __( '<b>If Menu</b> plugin detected a conflict with another plugin or theme and may not work as expected. <a href="%s" target="_blank">Read more about the issue here</a>', 'if-menu' ), 'https://wordpress.org/plugins/if-menu/faq/' ) ?></p>
+				<p><?php printf(
+					wp_kses(
+						/* translators: error message for plugin conflict. */
+						__( 'If Menu plugin detected a conflict with another plugin or theme and may not work as expected. <a href="%s" target="_blank">Read more about the issue here</a>', 'if-menu' ),
+						array(
+							'a' => array(
+								'href' => array(),
+							),
+						)
+					),
+					esc_url( 'https://wordpress.org/plugins/if-menu/faq/' )
+				) ?></p>
       </div>
       <?php
 		}
