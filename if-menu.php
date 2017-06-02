@@ -196,12 +196,12 @@ class If_Menu {
             <option <?php selected( 'show', $if_menu_condition_type[$index] ) ?> value="show"><?php _e( 'Show', 'if-menu' ) ?></option>
             <option <?php selected( 'hide', $if_menu_condition_type[$index] ) ?> value="hide"><?php _e( 'Hide', 'if-menu' ) ?></option>
           </select>
-          <?php _e( 'if', 'if-menu' ); ?>
-          <select class="menu-item-if-menu-condition" id="edit-menu-item-if-menu-condition-<?php echo $item_id; ?>" name="menu-item-if-menu-condition[<?php echo $item_id; ?>][]">
+          <?php esc_html_e( 'if', 'if-menu' ); ?>
+          <select class="menu-item-if-menu-condition" id="edit-menu-item-if-menu-condition-<?php echo esc_attr( $item_id ); ?>" name="menu-item-if-menu-condition[<?php echo esc_attr( $item_id ); ?>][]">
             <?php foreach ($groupedConditions as $group => $conditions) : ?>
-              <optgroup label="<?php echo $group ?>">
+              <optgroup label="<?php echo esc_attr( $group ) ?>">
                 <?php foreach( $conditions as $condition ): ?>
-                  <option <?php selected( $condition['name'], $if_menu_condition[$index] ) ?>><?php echo $condition['name']; ?></option>
+                  <option <?php selected( $condition['name'], $if_menu_condition[$index] ) ?>><?php echo esc_html( $condition['name'] ); ?></option>
                 <?php endforeach ?>
               </optgroup>
             <?php endforeach ?>
