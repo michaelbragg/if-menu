@@ -184,8 +184,8 @@ class If_Menu {
 
     <p class="if-menu-enable description description-wide">
       <label>
-        <input <?php if (isset($if_menu_enable[0])) checked( $if_menu_enable[0], 1 ) ?> type="checkbox" value="1" class="menu-item-if-menu-enable" name="menu-item-if-menu-enable[<?php echo $item_id; ?>][]" />
-        <?php _e( 'Enable Conditional Logic', 'if-menu' ) ?>
+        <input <?php if (isset($if_menu_enable[0])) checked( $if_menu_enable[0], 1 ) ?> type="checkbox" value="1" class="menu-item-if-menu-enable" name="menu-item-if-menu-enable[<?php echo esc_attr( $item_id ); ?>][]" />
+        <?php esc_html_e( 'Enable Conditional Logic', 'if-menu' ) ?>
       </label>
     </p>
 
