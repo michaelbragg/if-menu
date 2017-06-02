@@ -192,9 +192,9 @@ class If_Menu {
     <div class="if-menu-conditions" style="display: <?php echo $if_menu_enable[0] ? 'block' : 'none' ?>">
       <?php for ($index = 0; $index < count($if_menu_enable); $index++) : ?>
         <p class="if-menu-condition description description-wide">
-          <select class="menu-item-if-menu-condition-type" id="edit-menu-item-if-menu-condition-type-<?php echo $item_id; ?>" name="menu-item-if-menu-condition-type[<?php echo $item_id; ?>][]">
-            <option <?php selected( 'show', $if_menu_condition_type[$index] ) ?> value="show"><?php _e( 'Show', 'if-menu' ) ?></option>
-            <option <?php selected( 'hide', $if_menu_condition_type[$index] ) ?> value="hide"><?php _e( 'Hide', 'if-menu' ) ?></option>
+          <select class="menu-item-if-menu-condition-type" id="edit-menu-item-if-menu-condition-type-<?php echo esc_attr( $item_id ); ?>" name="menu-item-if-menu-condition-type[<?php echo esc_html( $item_id ); ?>][]">
+            <option <?php selected( 'show', $if_menu_condition_type[$index] ) ?> value="show"><?php esc_html_e( 'Show', 'if-menu' ) ?></option>
+            <option <?php selected( 'hide', $if_menu_condition_type[$index] ) ?> value="hide"><?php esc_html_e( 'Hide', 'if-menu' ) ?></option>
           </select>
           <?php esc_html_e( 'if', 'if-menu' ); ?>
           <select class="menu-item-if-menu-condition" id="edit-menu-item-if-menu-condition-<?php echo esc_attr( $item_id ); ?>" name="menu-item-if-menu-condition[<?php echo esc_attr( $item_id ); ?>][]">
